@@ -1,17 +1,43 @@
 import { useState } from 'react'
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
-import React from 'react'
+import { createBrowserRouter, RouterProvider, Route, Outlet } from 'react-router-dom'
 import { Home } from '@/pages/Home'
 import { Register } from '@/pages/Register'
 import { Login } from '@/pages/Login'
 import { Write } from '@/pages/Write'
 import { Single } from '@/pages/Single'
+import  NavBar from '@/components/NavBar'
+import  Footer from '@/components/Footer.jsx'
 
+
+
+const Layouts = () => {
+  return (
+  <>
+    <NavBar />
+    <Outlet />
+    <Footer />
+  </>
+)
+}
 
 const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />
+      element: <Layouts />,
+      children:[
+        {
+      path: "/",
+      element: <Home />,
+        },
+        {
+      path: "/post/:id",
+      element: <Single />,
+        },
+        {
+     path: "/write",
+      element: <Write />,
+        }
+      ]
     },
     {
       path: "/register",
@@ -20,20 +46,14 @@ const router = createBrowserRouter([
     {
       path: "/login",
       element: <Login />
-    },
-    {
-      path: "/write",
-      element: <Write />
-    },
-    {
-      path: "/single",
-      element: <Single />
     }
 ])
 
 const App = () => {
   return (
-    <div>App</div>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   )
 }
 

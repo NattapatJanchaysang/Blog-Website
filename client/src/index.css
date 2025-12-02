@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+
+@utility main-button { /* ปุ่มแบบโคตรเท่ */
+  @apply px-6 py-2 rounded-full font-medium text-white bg-gray-700
+         transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
+         hover:scale-105 active:scale-95;
+}
+
+@utility text-glow { /* เพิ่มเอฟเฟกต์เรืองแสง ให้กับข้อความ */
+  @apply relative;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+@utility card-hover { /* สร้างแอนิเมชันสำหรับองค์ประกอบประเภท การ์ด เมื่อผู้ใช้นำเมาส์ไปวางเหนือองค์ประกอบ */
+  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+}
+
+@utility container {
+  margin-inline: auto;  /* ทำให้คอนเทนเนอร์ถูก จัดให้อยู่กึ่งกลางหน้าจอ ในแนวนอน */
+  padding-inline: 2rem; /* เพิ่มระยะห่าง ด้านซ้ายและขวา 2rem */
+
+  /* กำหนดความกว้าง สูงสุด ของคอนเทนเนอร์ ตาม ขนาดหน้าจอ */
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
