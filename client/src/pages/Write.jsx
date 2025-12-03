@@ -11,13 +11,13 @@ export const Write = () => {
   console.log(value)
 
   return (
-    <div className='container flex justify-between'>
+    <div className='container flex justify-between font-mono'>
       <div className='w-full h-auto p-10'>
         <ReactQuill theme="snow" value={value} onChange={setValue} />
       </div>
-      <div className='flex flex-col gap-y-4'>
-        <div className='container gap-y-2 border-1 p-2 flex flex-col items-center'>
-        <h1>Publish</h1>
+      <div className='flex flex-col gap-y-4 pt-2 w-100'>
+        <div className='container gap-y-2 p-2 flex flex-col'>
+        <h1 className='text-lg font-bold'>Publish</h1>
         <span>
           <b>Status: </b> Draft
         </span>
@@ -27,14 +27,14 @@ export const Write = () => {
         </span>
         
         <input className='hidden' type="file" id='file'/>
-        <label htmlFor="file" className='main-button mx-auto text-sm bg-blue-300 px-2 py-1 text-black flex text-center'><ImageIcon className='text-blue-800'/>Upload image</label>
+        <label htmlFor="file" className='main-button text-sm bg-blue-300 px-2 py-1 text-black flex justify-center'><ImageIcon className='text-blue-800'/>Upload image</label>
         
-          <button className='main-button mx-auto text-sm bg-orange-300 px-2 py-1 text-black'>Create as a draft</button>
-          <button className='main-button mx-auto text-sm bg-green-400 px-2 py-1 text-black'>Update</button>
+          <button className='main-button  text-sm bg-orange-300 px-2 py-1 text-black'>Create as a draft</button>
+          <button className='main-button  text-sm bg-green-400 px-2 py-1 text-black'>Update</button>
         
         </div>
-        <div className='border-1 p-2'>
-          <h1>Category</h1>
+        <div className='p-2 items-center'>
+          <h1 className='text-lg font-bold'>Category</h1>
           <div>
           <input type="radio" name="cat" value='art' id="art" />
           <label htmlFor="art">Art</label>
