@@ -1,38 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect,useState } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 
 export const Home = () => {
+  
+  const [posts,setPosts] = useState([])
 
-   const posts = [
-     {
-       id: 1,
-       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-       desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-       img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-     },
-     {
-       id: 2,
-       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-       desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-       img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-     },
-     {
-       id: 3,
-       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-       desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-       img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-     },
-     {
-       id: 4,
-       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-       desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-       img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-     },
-   ];
+  const cat = useLocation().search
+
+  console.log(location)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/api/posts/${cat}`)
+        setPosts(res.data)
+      } catch (error) {
+        console.log(err)
+      }
+    }
+    fetchData()
+  }, [cat])
+
 return (
+  
     <div>
       <div>
-        {posts.map((post) => (
+        {Array.isArray(posts) && posts.map((post) => (
           <div key={post.id} className='md:flex items-center container pt-20 md:[&:nth-child(odd)]:flex-row-reverse'>
             <div>
               <img className='w-auto max-h-200 px-24 ' src={`${post.img}`} alt="" />
