@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export const Register = () => {
 
@@ -12,8 +13,17 @@ export const Register = () => {
   const handleChange = e => {
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
   }
+  
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      const res = await axios.post("/api/auth/register", inputs)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+  } 
 
-  console.log(inputs)
 
   return (
 <div className='flex justify-center items-center h-screen bg-yellow-100 flex-col'>
@@ -22,7 +32,7 @@ export const Register = () => {
         <input className='border-b-1 p-4 m-4' type="text" placeholder='username' name="username" onChange={handleChange}/>
         <input className='border-b-1 p-4 m-4' type="email" placeholder='email' name="email" onChange={handleChange}/> 
         <input className='border-b-1 p-4 m-4' type="password" placeholder='password' name="password" onChange={handleChange}/>
-        <button className='main-button mx-auto my-4 text-center cursor-pointer'>Login</button>
+        <button className='main-button mx-auto my-4 text-center cursor-pointer' onClick={handleSubmit}>Register</button>
         <span className='text-center'>Do you have an account? <Link to='/login' className='text-blue-500'>Login</Link></span>
     </form>
 </div>

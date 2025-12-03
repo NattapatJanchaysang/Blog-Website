@@ -1,8 +1,16 @@
-import mysql from 'mysql'
+import mysql from 'mysql2'
 
 export const db = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:"1234",
+    password:"Nattapat142548",
     database:"blog"
+})
+
+db.connect((err) => {
+  if(err) {
+    console.log("DB Connection Error:", err)
+    return
+  }
+  console.log("Connected to MySQL")
 })
