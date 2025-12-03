@@ -37,3 +37,26 @@
     max-width: 1400px;
   }
 }
+
+@utility heighting {
+  margin-inline: auto;  /* ทำให้คอนเทนเนอร์ถูก จัดให้อยู่กึ่งกลางหน้าจอ ในแนวนอน */
+  padding-inline: 2rem; /* เพิ่มระยะห่าง ด้านซ้ายและขวา 2rem */
+
+  /* กำหนดความกว้าง สูงสุด ของคอนเทนเนอร์ ตาม ขนาดหน้าจอ */
+  @media (height >= 640px) {
+    max-height: 640px;
+  }
+  @media (height >= 768px) {
+    max-height: 768px;
+  }
+  @media (height >= 1024px) {
+    max-height: 1024px;
+  }
+  @media (height >= 1280px) {
+    max-height: 1280px;
+  }
+  @media (height >= 1400px) {
+    max-height: 1400px;
+  }
+}
+

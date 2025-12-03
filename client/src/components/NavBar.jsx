@@ -11,7 +11,7 @@ const { currentUser, logout } = useContext(AuthContext)
 
   return (
     <nav className='flex items-center justify-between px-12 py-2 bg-yellow-100 font-serif relative'>
-        <Link to='/' className='w-19 h-auto item-center'><img src="./public/Logo2.png" alt="Logo" /></Link>
+        <Link to='/' className='w-19 h-auto item-center'><img src="/Logo2.png" alt="Logo" /></Link>
         <div className='hidden md:flex gap-x-7 text-lg items-center'>
             <Link to='/?cat=art'>ART</Link>
             <Link to='/?cat=science'>SCIENCE</Link>
