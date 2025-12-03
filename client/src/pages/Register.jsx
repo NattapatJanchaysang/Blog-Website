@@ -10,6 +10,9 @@ export const Register = () => {
     password:""
   })
 
+
+  const [err, setError] = useState(null)
+
   const handleChange = e => {
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
   }
@@ -20,6 +23,7 @@ export const Register = () => {
       const res = await axios.post("/api/auth/register", inputs)
       console.log(res)
     } catch (err) {
+      setError(err.response.data)
       console.log(err)
     }
   } 
@@ -33,6 +37,7 @@ export const Register = () => {
         <input className='border-b-1 p-4 m-4' type="email" placeholder='email' name="email" onChange={handleChange}/> 
         <input className='border-b-1 p-4 m-4' type="password" placeholder='password' name="password" onChange={handleChange}/>
         <button className='main-button mx-auto my-4 text-center cursor-pointer' onClick={handleSubmit}>Register</button>
+        {err && <p className='text-red-600 text-center'>{err}</p>}
         <span className='text-center'>Do you have an account? <Link to='/login' className='text-blue-500'>Login</Link></span>
     </form>
 </div>
