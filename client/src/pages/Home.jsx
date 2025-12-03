@@ -33,11 +33,11 @@ return (
               <img className='container h-auto' src={`./public/${post.img}`} alt="" />
             </div>
             <div className="flex flex-col">
-              <Link className="link" to={`/post/${post.id}`}>
                 <h1 className='text-center font-bold text-2xl font-mono'>{post.title}</h1>
-              </Link>
               <p className='container p-4 font-mono text-justify'>{(post.desc)}</p>
+              <Link className="mx-auto" to={`/post/${post.id}`}>
               <button className='main-button mx-auto bg-yellow-200 text-black'>Read More</button>
+              </Link>
             </div>
           </div>
         ))}

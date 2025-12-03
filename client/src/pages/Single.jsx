@@ -1,5 +1,4 @@
-import React from 'react'
-import { Camera, Delete, PencilIcon, Trash } from 'lucide-react';
+import { PencilIcon, Trash } from 'lucide-react';
 import { Menu } from '../components/menu';
 
 export const Single = () => {

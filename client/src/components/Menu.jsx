@@ -18,11 +18,11 @@ export const Menu = () => {
   ]
 
   return (
-    <div className='flex flex-col gap-y-4'>
-        <h1>Other posts You may like.</h1>
+    <div className='flex flex-col gap-y-4 py-6'>
+        <h1 className='text-xl'>Other posts You may like.</h1>
         {posts.map(post => (
             <div key={post.id} className='flex flex-col justify-center'>
-                <img src={post.img} />
+                <img className='max-h-40 w-auto' src={post.img} />
                 <h2 className='font-bold text-lg font-mono'>{post.title}</h2>
                 <button className='main-button mx-auto bg-yellow-400'>Readmore</button>
             </div>
