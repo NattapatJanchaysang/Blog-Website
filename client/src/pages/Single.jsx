@@ -63,7 +63,7 @@ export const Single = () => {
           </div>
         </div>
         <div>
-          <Menu />
+          <Menu cat={post.cat}/>
         </div>
       </div>
     )
