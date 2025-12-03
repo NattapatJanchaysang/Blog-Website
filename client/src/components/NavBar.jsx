@@ -19,7 +19,7 @@ const { currentUser, logout } = useContext(AuthContext)
             <Link to='/?cat=cinema'>CINEMA</Link>
             <Link to='/?cat=design'>DESIGN</Link>
             <Link to='/?cat=food'>FOOD</Link>
-            <span className='font-bold font-mono text-2xl text-glow'>{currentUser?.username}</span>
+            <span className='font-bold font-mono text-3xl text-glow text-yellow-400 mb-1'>{currentUser?.username}</span>
             {currentUser ? (<span className="cursor-pointer main-button py-2 px-1 text-red-900 bg-red-200" onClick={logout}>Logout</span>) : (
             <Link className="cursor-pointer main-button py-2 px-1 text-green-900 bg-green-200" to="/login">
               Login
@@ -31,8 +31,8 @@ const { currentUser, logout } = useContext(AuthContext)
         </div>
 
         <div className='flex gap-x-4 md:hidden'>
-            <span className='font-bold font-mono text-2xl text-glow'>{currentUser?.username}</span>
-            {currentUser ? (<span className="cursor-pointer main-button py-2 px-1 text-red-900 bg-red-200" onClick={logout}>Logout</span>) : (
+            <span className='font-bold font-mono text-3xl text-glow text-yellow-400 pt-2 px-4'>{currentUser?.username}</span>
+            {currentUser ? (<span className="cursor-pointer main-button py-4 px-1 text-red-900 bg-red-200" onClick={logout}>Logout</span>) : (
             <Link className="cursor-pointer main-button py-4 px-2 text-green-900 bg-green-200" to="/login">
               Login
             </Link>

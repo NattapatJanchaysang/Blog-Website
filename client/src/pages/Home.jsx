@@ -41,7 +41,7 @@ return (
                 <h1 className='text-center font-bold text-2xl font-mono text-glow'>{post.title}</h1>
               <p className='container p-4 font-mono text-justify'>{(post.desc)}</p>
               <Link className="mx-auto" to={`/post/${post.id}`}>
-              <button className='main-button mx-auto bg-yellow-200 text-black cursor-pointer'>Read More</button>
+              <button className='main-button mx-auto bg-yellow-200 text-black cursor-pointer text-yellow-900'>Read More</button>
               </Link>
             </div>
           </div>
