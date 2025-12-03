@@ -27,7 +27,7 @@ export const Write = () => {
         </span>
         
         <input className='hidden' type="file" id='file'/>
-        <label htmlFor="file" className='main-button mx-auto text-sm bg-blue-300 px-2 py-1 text-black flex text-center'><ImageIcon className='text-blue-800 text-center'/>Upload image</label>
+        <label htmlFor="file" className='main-button mx-auto text-sm bg-blue-300 px-2 py-1 text-black flex text-center'><ImageIcon className='text-blue-800'/>Upload image</label>
         
           <button className='main-button mx-auto text-sm bg-orange-300 px-2 py-1 text-black'>Create as a draft</button>
           <button className='main-button mx-auto text-sm bg-green-400 px-2 py-1 text-black'>Update</button>
