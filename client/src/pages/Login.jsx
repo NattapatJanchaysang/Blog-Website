@@ -1,9 +1,13 @@
 import React from 'react'
-import { Link, Navigate } from 'react-router-dom'
-import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState, useContext } from 'react'
+import { AuthContext } from '../context/authContext'
 import axios from 'axios'
 
 export const Login = () => {
+  
+  const { login } = useContext(AuthContext);
+  const Navigate = useNavigate()
 
   const [inputs, setInputs] = useState({
     username:"",
@@ -12,6 +16,7 @@ export const Login = () => {
 
 
   const [err, setError] = useState(null)
+  
 
   const handleChange = e => {
     setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
@@ -20,11 +25,11 @@ export const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await axios.post("/api/auth/login", inputs)
-      Navigate("/")
+      const res = await login(inputs)
+      Navigate("/" )
       console.log(res)
     } catch (err) {
-      setError(err.response.data)
+      setError(err.response?.data || err.message)
       console.log(err)
     }
   } 

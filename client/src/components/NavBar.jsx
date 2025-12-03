@@ -1,7 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/authContext.jsx'
+import { useContext } from 'react'
 
 const NavBar = () => {
+
+
+
+const { currentUser, logout } = useContext(AuthContext)
+
   return (
     <nav className='flex items-center justify-between px-12 py-2 bg-yellow-100 font-serif relative'>
         <Link to='/' className='w-19 h-auto item-center'><img src="./public/Logo2.png" alt="Logo" /></Link>
@@ -12,11 +19,15 @@ const NavBar = () => {
             <Link to='/?cat=cinema'>CINEMA</Link>
             <Link to='/?cat=design'>DESIGN</Link>
             <Link to='/?cat=food'>FOOD</Link>
-            <span>Username</span>
-            <span className='cursor-pointer'>Logout</span>
+            <span className='font-bold font-mono text-2xl text-glow'>{currentUser?.username}</span>
+            {currentUser ? (<span className="cursor-pointer main-button py-2 px-1 text-red-900 bg-red-200" onClick={logout}>Logout</span>) : (
+            <Link className="cursor-pointer main-button py-2 px-1 text-green-900 bg-green-200" to="/login">
+              Login
+            </Link>
+          )}
             <Link to='/write' className='rounded-full font-medium text-yellow-800 bg-yellow-300
          transition-all duration-300 hover:shadow-[0_0_10px_rgba(194,141,47,0.5)]
-         hover:scale-120 active:scale-95'>Write</Link>
+         hover:scale-120 active:scale-95 py-2 px-1'>Write</Link>
         </div>
     </nav>
   )

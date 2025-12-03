@@ -1,5 +1,6 @@
 import {db} from "../db.js"
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken'
 
 export const register = (req, res) => {
     const q = "SELECT * FROM users WHERE email = ? or username = ?"
@@ -26,9 +27,30 @@ export const register = (req, res) => {
 }
 
 export const login = (req, res) => {
-    res.json("from controller")
+    const q = "SELECT *FROM users WHERE username = ?"
+
+    db.query(q, [req.body.username],async (err, data) => {
+        if(err) return res.json(err)
+        if(data.length === 0 ) return res.status(404).json("User not found!")
+
+        //Check password
+        const isPasswordCorrect = await bcrypt.compare(req.body.password, data[0].password); // true
+
+        if (!isPasswordCorrect) return res.status(400).json("Wrong Username 0r Password!")
+
+        const token = jwt.sign({id:data[0].id}, "jwtkey")
+        const {password, ...other} = data[0]
+
+        res.cookie("access_token", token ,{
+            httpOnly:true
+        }).status(200).json(other)
+        
+    })
 }
 
 export const logout = (req, res) => {
-    res.json("from controller")
+  res.clearCookie("access_token",{
+    sameSite:"none",
+    secure:true
+  }).status(200).json("User has been logged out.")
 }
