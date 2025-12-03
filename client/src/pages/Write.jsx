@@ -15,7 +15,7 @@ export const Write = () => {
       <div className='w-full h-auto p-10'>
         <ReactQuill theme="snow" value={value} onChange={setValue} />
       </div>
-      <div className='flex flex-col gap-y-4 pt-2 w-100'>
+      <div className='flex flex-col gap-y-4 pt-2 w-60'>
         <div className='container gap-y-2 p-2 flex flex-col'>
         <h1 className='text-lg font-bold'>Publish</h1>
         <span>
