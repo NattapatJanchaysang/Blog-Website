@@ -17,8 +17,8 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      // ถ้าต้องการ proxied endpoint เพิ่มที่นี่ เช่น '/posts': { target: 'http://localhost:8000' }
+      // ถ้าต้องการ proxied endpoint เพิ่มที่นี่ เช่น '/posts': { target: 'https://blogserver-sepia.vercel.app' }
     }
   }
 })
-// ...existing code...
+// ...existing code...http://localhost:8000
