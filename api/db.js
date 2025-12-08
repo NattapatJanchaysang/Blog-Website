@@ -6,13 +6,18 @@ import path from 'path'
 dotenv.config({ path: '.env' })
 
 const caPath = path.resolve(process.cwd(), 'certs', 'isrgrootx1.pem')
-let ca
+let ca = undefined
+
+// Try to load CA cert, but DON'T exit if missing
 try {
-  ca = fs.readFileSync(caPath)
+  if (fs.existsSync(caPath)) {
+    ca = fs.readFileSync(caPath)
+    console.log('TLS CA loaded successfully')
+  } else {
+    console.warn('TLS CA not found at', caPath)
+  }
 } catch (err) {
-  console.error('TLS CA not found at', caPath)
-  console.error('Download the TiDB Cloud CA and place it at api/certs/isrgrootx1.pem')
-  process.exit(1)
+  console.warn('Error loading TLS CA:', err.message)
 }
 
 export const db = mysql.createConnection({
@@ -21,10 +26,7 @@ export const db = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_DATABASE,
     port: Number(process.env.DATABASE_PORT) || 4000,
-    ssl: {
-      ca,
-      rejectUnauthorized: true
-    }
+    ssl: ca ? { ca, rejectUnauthorized: true } : undefined
 })
 
 db.connect((err) => {
