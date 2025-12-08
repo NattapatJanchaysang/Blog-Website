@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import the default Quill styles
-import { Menu } from '../components/menu';
 import { ImageIcon } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
