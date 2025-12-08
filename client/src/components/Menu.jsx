@@ -22,7 +22,7 @@ export const Menu = ({cat}) => {
         <h1 className='text-xl'>Other posts You may like.</h1>
         {posts.map(post => (
             <div key={post.id} className='flex flex-col justify-center'>
-                <img className='max-h-40 w-auto object-cover' src={post.img} />
+                <img className='max-h-40 w-auto object-cover' src={`../../upload/${post?.img}`} />
                 <h2 className='font-bold text-lg font-mono'>{post.title}</h2>
                 <button className='main-button mx-auto bg-yellow-400'>Readmore</button>
             </div>

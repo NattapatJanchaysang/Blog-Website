@@ -3,8 +3,9 @@ import { Menu } from '../components/menu';
 import moment from 'moment/moment';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/authContext.jsx';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import DOMPurify from "dompurify";
 
 export const Single = () => {
   
@@ -42,24 +43,28 @@ export const Single = () => {
     }
   }
 
+      const getText = (html) =>{
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    return doc.body.textContent
+  }
 
     return (
       <div className='flex container'>
       <div className='items-center w-full'>
-        <img className='max-h-100 w-full object-cover pt-6 px-6' src={post?.img} alt="picture" />
+        <img className='max-h-100 w-full object-cover pt-6 px-6' src={`../../upload/${post?.img}`} alt="picture" />
           <div className='flex gap-x-2 px-6 pt-2'>
            {post.userImg && <img src={post.userImg} alt="userimg" />}
            <span>{post?.username}</span>
            <p>Posted {moment(post?.date).fromNow()}</p>
             {currentUser?.username === post?.username && <div className='flex'>
-              <button className='main-button px-2 bg-green-100'><PencilIcon className='hover:scale-110 text-green-900'/></button>
+              <Link to={`/write?edit=2`} state={post} className='main-button px-2 bg-green-100'><PencilIcon className='hover:scale-110 text-green-900'/></Link>
               <button className='main-button px-2 mx-2 bg-red-100' onClick={handleDelete}><Trash className='text-red-800 hover:scale-110'/></button>
             </div>}
           </div>
 
           <div className='px-6 py-4text-justify'>
             <h1>{post?.title}</h1>
-            {post?.desc}
+            <p>{getText(post?.desc)}</p>
           </div>
         </div>
         <div>
