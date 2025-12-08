@@ -1,0 +1,37 @@
+# Node
+node_modules/
+api/node_modules/
+client/node_modules/
+**/node_modules/
+
+# Environment files (do not commit)
+.env
+.env.local
+.env.*.local
+api/.env
+client/.env
+**/.env
+
+# Certificates / keys
+certs/
+api/certs/
+client/certs/
+*.pem
+*.key
+
+# Build / output
+dist/
+build/
+client/build/
+client/.next/
+.next/
+out/
+
+# Logs
+logs/
+*.log
+
+# Editors / OS
+.vscode/
+.DS_Store
+Thumbs.db
