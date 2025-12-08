@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://blogserver-sepia.vercel.app/api/posts',
+        target: 'https://blogserver-sepia.vercel.app',
         changeOrigin: true,
         secure: false,
       },
