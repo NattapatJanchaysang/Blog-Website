@@ -4,29 +4,42 @@ import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import cookieParser from 'cookie-parser'
 import multer from 'multer'
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 
 const app = express()
 const PORT= 8000
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'blog_app', // ชื่อโฟลเดอร์ที่จะไปโผล่ใน Cloudinary
+    allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
+  },
+});
+
 
 app.use(express.json())
 app.use(cookieParser())
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/public/upload");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
-});
 
-const upload = multer({ storage });
 
+const upload = multer({ storage: storage });
+
+// 3. แก้ Route Upload
 app.post("/api/upload", upload.single("file"), function (req, res) {
-  const file = req.file;
-  res.status(200).json(file.filename);
+  // Cloudinary จะส่ง path รูปกลับมาใน req.file.path (เป็น URL เต็มๆ เช่น https://res.cloudinary...)
+  if (!req.file) {
+      return res.status(400).json("No file uploaded");
+  }
+  res.status(200).json(req.file.path); 
 });
 
 
