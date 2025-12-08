@@ -1,5 +1,5 @@
 import { PencilIcon, Trash } from 'lucide-react';
-import { Menu } from '../components/menu';
+import { Menu } from '../components/Menu.jsx';
 import moment from 'moment/moment';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/authContext.jsx';
