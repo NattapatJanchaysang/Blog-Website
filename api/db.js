@@ -5,20 +5,7 @@ import path from 'path'
 
 dotenv.config({ path: '.env' })
 
-const caPath = path.resolve(process.cwd(), 'certs', 'isrgrootx1.pem')
-let ca = undefined
-
-// Try to load CA cert, but DON'T exit if missing
-try {
-  if (fs.existsSync(caPath)) {
-    ca = fs.readFileSync(caPath)
-    console.log('TLS CA loaded successfully')
-  } else {
-    console.warn('TLS CA not found at', caPath)
-  }
-} catch (err) {
-  console.warn('Error loading TLS CA:', err.message)
-}
+const ca = process.env.DB_CA_CERT;
 
 export const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -26,7 +13,7 @@ export const db = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_DATABASE,
     port: Number(process.env.DATABASE_PORT) || 4000,
-    ssl: ca ? { ca, rejectUnauthorized: true } : undefined
+    ssl: ca ? { ca, rejectUnauthorized: false } : undefined
 })
 
 db.connect((err) => {
