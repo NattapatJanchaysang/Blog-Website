@@ -34,7 +34,7 @@ return (
         {Array.isArray(posts) && posts.map((post) => (
           <div key={post.id} className='md:flex items-center container pt-20 md:[&:nth-child(odd)]:flex-row-reverse'>
             <div>
-              <img className='w-auto h-[400px] px-24 object-cover' src={post.img} alt="" />
+              <img className='w-auto h-[400px] px-24 object-cover' src='/goat.jpg' alt="postimg" />
             </div>
             <div className="flex flex-col">
                 <h1 className='text-center font-bold text-2xl font-mono text-glow'>{post.title}</h1>
