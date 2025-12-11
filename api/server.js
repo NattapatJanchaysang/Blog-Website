@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import multer from 'multer'
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
-
+import cors from 'cors'
 
 const app = express()
 const PORT= 8000
