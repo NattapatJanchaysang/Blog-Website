@@ -16,7 +16,7 @@ export const Home = () => {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts/${cat}`)
         setPosts(res.data)
       } catch (error) {
-        console.log(err)
+        console.log(error)
       }
     }
     fetchData()

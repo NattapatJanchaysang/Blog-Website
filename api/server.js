@@ -28,7 +28,11 @@ const storage = new CloudinaryStorage({
 
 app.use(express.json())
 app.use(cookieParser())
-
+app.use(cors({
+  origin: ["https://njblog-seven.vercel.app", "http://localhost:5173"], // อนุญาต Frontend ของคุณ (ทั้งบนเว็บและ localhost)
+  methods: ["GET", "POST", "PUT", "DELETE"], // อนุญาต method อะไรบ้าง
+  credentials: true // ถ้ามีการส่ง cookie/token ต้องเปิดตัวนี้
+}))
 
 
 const upload = multer({ storage: storage });
