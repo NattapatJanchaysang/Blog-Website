@@ -7,7 +7,7 @@ dotenv.config({ path: '.env' })
 
 const ca = process.env.DB_CA_CERT;
 
-export const db = mysql.createConnection({
+export const db = mysql.createPool({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
