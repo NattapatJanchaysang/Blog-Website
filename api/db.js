@@ -13,13 +13,8 @@ export const db = mysql.createPool({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_DATABASE,
     port: Number(process.env.DATABASE_PORT) || 4000,
-    ssl: ca ? { ca, rejectUnauthorized: false } : undefined
-})
-
-db.connect((err) => {
-  if(err) {
-    console.log("DB Connection Error:", err)
-    return
-  }
-  console.log("Connected to MySQL")
+    ssl: ca ? { ca, rejectUnauthorized: false } : undefined,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 })
