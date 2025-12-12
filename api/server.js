@@ -11,6 +11,9 @@ import cors from 'cors'
 const app = express()
 const PORT= 8000
 
+// behind Vercel/other proxies we need this so secure cookies + IPs work
+app.set('trust proxy', 1)
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -44,6 +47,9 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
       return res.status(400).json("No file uploaded");
   }
   res.status(200).json(req.file.path); 
+}, (err, req, res, next) => {
+  console.error("Upload failed", err);
+  return res.status(500).json("Upload failed");
 });
 
 
