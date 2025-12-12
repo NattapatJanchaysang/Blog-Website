@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export const Register = () => {
+
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     username:"",
@@ -22,6 +24,7 @@ export const Register = () => {
     try {
       const res = await axios.post("/api/auth/register", inputs)
       console.log(res)
+      navigate("/")
     } catch (err) {
       setError(err.response.data)
       console.log(err)

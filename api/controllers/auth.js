@@ -21,7 +21,7 @@ export const register = (req, res) => {
 
         db.query(q2, values, (err,data) => {
         if(err) return res.json(err)
-        if(data.length) return res.status(200).json("User has been created.")
+        return res.status(200).json("User has been created.")
         })
     })
 }

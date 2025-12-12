@@ -10,6 +10,7 @@ import  Footer from '@/components/Footer.jsx'
 
 
 
+
 const Layouts = () => {
   return (
   <>
