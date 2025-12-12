@@ -1,7 +1,7 @@
 ## Blog Website (MERN + Cloudinary)
 
 เว็บบล็อกเต็มระบบ แยก frontend (Vite/React) และ backend (Express + MySQL) และยืนยันตัวตนด้วย JWT cookie
-Live Demo: [blogserver-sepia.vercel.app](https://blogserver-sepia.vercel.app)
+Live Demo: [njblog-seven.vercel.app](https://njblog-seven.vercel.app)
 
 ### สรุปฟีเจอร์
 - บัญชีผู้ใช้: สมัคร, ล็อกอิน, ล็อกเอาต์, cookie httpOnly ปลอดภัย
