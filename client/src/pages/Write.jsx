@@ -22,7 +22,7 @@ export const Write = () => {
     try {
       const formData = new FormData();                      
       formData.append("file", file);
-      const res = await axios.post(`/api/upload`, formData);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/upload`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -34,10 +34,10 @@ export const Write = () => {
     const imgUrl = await upload()
 
     try {
-      state ? await axios.put(`/api/posts/${state.id}`,{
+      state ? await axios.put(`${import.meta.env.VITE_API_URL}/api/posts/${state.id}`,{
         title,desc:value,cat,img:file ? imgUrl: ""}
       ) :
-      await axios.post(`/api/posts/`,{
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/posts/`,{
         title,desc:value,cat,img:file ? imgUrl: "", date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")}
       )
     } catch (err) {

@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     try {
-      const res = await axios.post("/api/auth/login", inputs);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, inputs);
       setCurrentUser(res.data);
       return res.data;
     } catch (error) {
@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("/api/auth/logout");
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`);
       setCurrentUser(null);
     } catch (error) {
       console.error(error);
