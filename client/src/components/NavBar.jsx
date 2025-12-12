@@ -29,18 +29,6 @@ const { currentUser, logout } = useContext(AuthContext)
          transition-all duration-300 hover:shadow-[0_0_10px_rgba(194,141,47,0.5)]
          hover:scale-120 active:scale-95 py-2 px-1'>Write</Link>
         </div>
-
-        <div className='flex gap-x-4 md:hidden'>
-            <span className='font-bold font-mono text-3xl text-glow text-yellow-400 pt-2 px-4'>{currentUser?.username}</span>
-            {currentUser ? (<span className="cursor-pointer main-button py-4 px-1 text-red-900 bg-red-200" onClick={logout}>Logout</span>) : (
-            <Link className="cursor-pointer main-button py-4 px-2 text-green-900 bg-green-200" to="/login">
-              Login
-            </Link>
-          )}
-            <Link to='/write' className='rounded-full font-medium text-yellow-800 bg-yellow-300
-         transition-all duration-300 hover:shadow-[0_0_10px_rgba(194,141,47,0.5)]
-         hover:scale-120 active:scale-95 py-4 px-2'>Write</Link>
-        </div>
     </nav>
   )
 }

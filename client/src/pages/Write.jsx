@@ -31,14 +31,24 @@ export const Write = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const imgUrl = await upload()
+    let imgUrl = "";
+    if (file) {
+        try {
+            imgUrl = await upload();
+        } catch (err) {
+            console.log("No Image uploaded", err);
+            return; // หยุดทำงานถ้าอัปโหลดรูปไม่ผ่าน
+        }
+    }
 
     try {
       state ? await axios.put(`${import.meta.env.VITE_API_URL}/api/posts/${state.id}`,{
-        title,desc:value,cat,img:file ? imgUrl: ""}
+        title,desc:value,cat,img:file ? imgUrl: ""},
+        { withCredentials: true }
       ) :
       await axios.post(`${import.meta.env.VITE_API_URL}/api/posts/`,{
-        title,desc:value,cat,img:file ? imgUrl: "", date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")}
+        title,desc:value,cat,img:file ? imgUrl: "", date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")},
+        { withCredentials: true }
       )
     } catch (err) {
       console.log(err)
