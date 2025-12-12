@@ -1,203 +1,57 @@
-# Blog Website - README
+## Blog Website (MERN + Cloudinary)
 
-## 📝 รายละเอียดโปรเจค
+เว็บบล็อกเต็มระบบ แยก frontend (Vite/React) และ backend (Express + MySQL) และยืนยันตัวตนด้วย JWT cookie
 
-**NJ Blog** เป็นแอปพลิเคชันบล็อกแบบเต็มสแต็ก (Full-stack) ที่สร้างด้วยเทคโนโลยีเว็บสมัยใหม่ ช่วยให้ผู้ใช้สามารถสร้าง อ่าน อัปเดต และลบโพสต์บล็อกจัดเรียงตามหมวดหมู่ พร้อมระบบยืนยันตัวตนและอัปโหลดรูปภาพ
+### สรุปฟีเจอร์
+- บัญชีผู้ใช้: สมัคร, ล็อกอิน, ล็อกเอาต์, cookie httpOnly ปลอดภัย
+- โพสต์: สร้าง/แก้ไข/ลบ/อ่าน, จัดหมวดหมู่, ตัวแก้ไข Rich Text (React Quill)
+- UI: React Router, Lucide icons, Tailwind utility styles (ผ่านไฟล์ CSS ในโปรเจ็กต์)
 
-## 🎯 ฟีเจอร์หลัก
+### โครงสร้างโปรเจ็กต์
+- api/ : โค้ดฝั่งเซิร์ฟเวอร์ Express
+- client/ : โค้ดฝั่งเว็บ React (Vite)
 
-- **ยืนยันตัวตน**: สมัครสมาชิกและเข้าสู่ระบบด้วยการแฮชรหัสผ่านที่ปลอดภัย
-- **จัดการบล็อก**: สร้าง แก้ไข และลบโพสต์บล็อก
-- **หมวดหมู่**: กรองโพสต์ตามหมวดหมู่ (ศิลปะ วิทยาศาสตร์ เทคโนโลยี ภาพยนตร์ ดีไซน์ อาหาร)
-- **ตัวแก้ไขข้อความสมบูรณ์**: เขียนโพสต์ด้วยข้อความจัดรูปแบบโดยใช้ React Quill
-- **อัปโหลดรูปภาพ**: อัปโหลดรูปปกสำหรับโพสต์บล็อก
-- **โปรไฟล์ผู้ใช้**: แสดงข้อมูลผู้ใช้พร้อมโพสต์ของพวกเขา
-- **ออกแบบที่ตอบสนอง**: อินเทอร์เฟซที่เหมาะสมกับอุปกรณ์มือถือ
-
-## 🛠️ เทคโนโลยีที่ใช้
-
-### Frontend (`client`)
-- **React 18** - ไลบรารี UI
-- **Vite** - เครื่องมือสร้าง
-- **Tailwind CSS v4** - CSS Framework
-- **React Router v7** - การนำทาง
-- **Axios** - HTTP client
-- **React Quill** - ตัวแก้ไขข้อความสมบูรณ์
-- **Moment.js** - จัดรูปแบบวันที่
-- **Lucide React** - ไลบรารีไอคอน
-- **DOMPurify** - การล้างข้อมูล HTML
-
-### Backend (`api`)
-- **Express.js** - เฟรมเวิร์กเว็บ
-- **MySQL2** - ไดรเวอร์ฐานข้อมูล
-- **JWT** - โทเค็นยืนยันตัวตน
-- **Bcryptjs** - การแฮชรหัสผ่าน
-- **Multer** - มิดเดิลแวร์อัปโหลดไฟล์
-- **Cookie Parser** - การจัดการคุกกี้
-
-## 📁 โครงสร้างโปรเจค
+### การตั้งค่า Environment Variables
+สร้างไฟล์ `.env` ในโฟลเดอร์ `api/` (ใช้ค่าจริงของคุณ)
 
 ```
-Blog-Website/
-├── api/                    # เซิร์ฟเวอร์ Backend
-│   ├── controllers/        # ลอจิกธุรกิจ
-│   │   ├── auth.js
-│   │   ├── post.js
-│   │   └── user.js
-│   ├── routes/            # จุดปลายทาง API
-│   │   ├── auth.js
-│   │   ├── posts.js
-│   │   └── users.js
-│   ├── server.js          # แอป Express
-│   ├── db.js              # การเชื่อมต่อ MySQL
-│   ├── package.json
-│   ├── vercel.json        # ตั้งค่า Vercel
-│   └── upload/            # โฟลเดอร์อัปโหลด
-│
-└── client/                # แอป Frontend
-    ├── src/
-    │   ├── components/    # คอมโพเนนต์ UI
-    │   │   ├── Footer.jsx
-    │   │   ├── Menu.jsx
-    │   │   └── NavBar.jsx
-    │   ├── pages/         # หน้าเส้นทาง
-    │   │   ├── Home.jsx
-    │   │   ├── Login.jsx
-    │   │   ├── Register.jsx
-    │   │   ├── Single.jsx
-    │   │   └── Write.jsx
-    │   ├── context/       # Auth context
-    │   │   └── authContext.jsx
-    │   ├── App.jsx        # แอปหลัก
-    │   ├── index.css      # สไตล์ทั่วโลก
-    │   └── main.jsx
-    ├── public/
-    │   └── upload/
-    ├── package.json
-    ├── vite.config.js
-    ├── eslint.config.js
-    └── index.html
+DATABASE_HOST=...
+DATABASE_USER=...
+DATABASE_PASSWORD=...
+DATABASE_DATABASE=...
+DATABASE_PORT=3306
+JWT_SECRET=jwtkey
+
+CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
 ```
 
-## 🚀 เริ่มต้นใช้งาน
+สำหรับ `client/` ให้ตั้งใน `.env` (หรือบน Vercel) เช่น
 
-### ข้อกำหนดเบื้องต้น
-- Node.js (v16+)
-- ฐานข้อมูล MySQL
-- npm หรือ yarn
-
-### การติดตั้ง
-
-#### 1. ตั้งค่า Backend
-```bash
-cd api
-npm install
+```
+VITE_API_URL=https://your-backend-domain
+VITE_CLERK_PUBLISHABLE_KEY=...
 ```
 
-สร้างไฟล์ `.env`:
-```
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=blog
-JWT_SECRET=your_secret_key
-PORT=8000
-```
+### การรันฝั่ง Backend (api/)
+1) ติดตั้งแพ็กเกจ: `npm install`
+2) เริ่ม dev: `npm run dev` (ใช้ nodemon)
+3) API หลัก: `/api/posts`, `/api/auth`, `/api/users`, และ `/api/upload`
 
-#### 2. ตั้งค่า Frontend
-```bash
-cd client
-npm install
-```
+### การรันฝั่ง Frontend (client/)
+1) ติดตั้งแพ็กเกจ: `npm install`
+2) เริ่ม dev: `npm run dev`
+3) เปิดเบราว์เซอร์ที่พอร์ตที่ Vite แจ้ง (ปกติ 5173)
 
-สร้างไฟล์ `.env`:
-```
-VITE_API_URL=http://localhost:8000
-```
+### การดีพลอย (แนวทางย่อ)
+- Backend: ดีพลอยบน Vercel/Render ฯลฯ พร้อมตั้ง environment และเปิด `app.set('trust proxy', 1)` (มีในโค้ดแล้ว) เพื่อให้ secure cookie ทำงานหลัง proxy
+- Frontend: ตั้ง `VITE_API_URL` ชี้โดเมน backend และ redeploy
 
-#### 3. รันเซิร์ฟเวอร์พัฒนา
+### ทดสอบพื้นฐาน
+- สมัคร → ล็อกอิน → โพสต์ใหม่พร้อมอัปโหลดรูป → ตรวจว่ารูปขึ้นและโพสต์แสดงในหน้า Home/Single
+- แก้ไข/ลบโพสต์ของตนเองต้องแน่ใจว่า cookie ถูกส่ง (withCredentials เปิดในโค้ดแล้ว)
 
-**Backend** (จากโฟลเดอร์ `api`):
-```bash
-npm run dev
-```
-เซิร์ฟเวอร์ทำงานที่ `http://localhost:8000`
-
-**Frontend** (จากโฟลเดอร์ `client`):
-```bash
-npm run dev
-```
-Frontend ทำงานที่ `http://localhost:5173`
-
-## 📚 จุดปลายทาง API
-
-### โพสต์
-- `GET /api/posts` - ดึงโพสต์ทั้งหมด
-- `GET /api/posts/:id` - ดึงโพสต์เดี่ยว
-- `POST /api/posts` - สร้างโพสต์ (ต้องยืนยันตัวตน)
-- `PUT /api/posts/:id` - อัปเดตโพสต์ (ต้องยืนยันตัวตน)
-- `DELETE /api/posts/:id` - ลบโพสต์ (ต้องยืนยันตัวตน)
-
-### ยืนยันตัวตน
-- `POST /api/auth/register` - สมัครสมาชิก
-- `POST /api/auth/login` - เข้าสู่ระบบ
-- `POST /api/auth/logout` - ออกจากระบบ
-
-### ผู้ใช้
-- `GET /api/users/:id` - ดึงข้อมูลผู้ใช้
-- `PUT /api/users/:id` - อัปเดตข้อมูลผู้ใช้ (ต้องยืนยันตัวตน)
-
-### อัปโหลด
-- `POST /api/upload` - อัปโหลดไฟล์รูปภาพ
-
-## 🔐 ระบบยืนยันตัวตน
-
-- รหัสผ่านแฮชด้วย **bcryptjs**
-- โทเค็น JWT เก็บไว้ในคุกกี้ HTTP-only
-- เส้นทางที่ป้องกันต้องใช้โทเค็นที่ถูกต้อง
-
-## 🎨 สไตล์
-
-Tailwind CSS พร้อม utilities ที่กำหนดเอง:
-- `main-button` - ปุ่มหลักพร้อมเอฟเฟกต์แสง
-- `text-glow` - เอฟเฟกต์แสงเงา
-- `container` - คอนเทนเนอร์ที่ตอบสนอง
-- `card-hover` - แอนิเมชันการโฮเวอร์
-
-## 👨‍💻 หน้าที่ของไฟล์หลัก
-
-| ไฟล์ | หน้าที่ |
-|------|--------|
-| `api/server.js` | ตั้งค่าและรัน Express server |
-| `api/db.js` | การเชื่อมต่อฐานข้อมูล MySQL |
-| `client/src/App.jsx` | กำหนดค่าเส้นทางหลัก |
-| `client/src/context/authContext.jsx` | ระบบจัดการสถานะการยืนยันตัวตน |
-| `client/src/pages/Home.jsx` | หน้าแรกแสดงรายการโพสต์ |
-| `client/src/pages/Write.jsx` | หน้าสร้างและแก้ไขโพสต์ |
-| `client/src/pages/Single.jsx` | หน้าแสดงโพสต์เดี่ยว |
-
-## 🌐 ตัวแปรสภาพแวดล้อม
-
-### Backend (`.env`)
-```
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=blog
-JWT_SECRET=your_secret_key_here
-PORT=8000
-NODE_ENV=development
-```
-
-### Frontend (`.env`)
-```
-VITE_API_URL=http://localhost:8000
-```
-
-## 📝 ลิขสิทธิ์
-
-ISC
-
----
-
-**สร้างเมื่อ**: December 8, 2025
+### ปัญหาที่พบบ่อย
+- 401 กับการสร้างโพสต์: ตรวจว่าได้ล็อกอินและเบราว์เซอร์ส่ง cookie (CORS ต้องตรงโดเมน)
+- 500 ตอนอัปโหลด: เช็กค่า Cloudinary ใน env และขนาดไฟล์ไม่เกินลิมิตของโฮสต์
