@@ -52,18 +52,20 @@ export const Single = () => {
       <div className='flex container'>
       <div className='items-center w-full'>
         <img className='max-h-100 w-full object-cover pt-6 px-6' src={`../../upload/${post?.img}`} alt="picture" />
-          <div className='flex gap-x-2 px-6 pt-2'>
+          <div className='flex gap-x-2 px-6 pt-2 justify-between items-center text-lg mb-6'>
+            <div className='flex gap-x-2'>
            {post.userImg && <img src={post.userImg} alt="userimg" />}
-           <span>{post?.username}</span>
-           <p>Posted {moment(post?.date).fromNow()}</p>
+           <span className='font-bold'>{post?.username}</span>
+           <p className='text-yellow-400 font-bold'>Posted {moment(post?.date).fromNow()}</p>
+           </div>
             {currentUser?.username === post?.username && <div className='flex'>
               <Link to={`/write?edit=2`} state={post} className='main-button px-2 bg-green-100'><PencilIcon className='hover:scale-110 text-green-900'/></Link>
               <button className='main-button px-2 mx-2 bg-red-100' onClick={handleDelete}><Trash className='text-red-800 hover:scale-110'/></button>
             </div>}
           </div>
-
-          <div className='px-6 py-4text-justify'>
-            <h1>{post?.title}</h1>
+              <hr className='border-dashed border-gray-400 border-1'/>
+          <div className='px-6 py-4 text-justify'>
+            <h1 className='font-bold my-4'>{post?.title}</h1>
             <p>{getText(post?.desc)}</p>
           </div>
         </div>
